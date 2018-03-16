@@ -4,47 +4,60 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        Map<String, Vehicles> vehicles = new LinkedHashMap<>();
 
         String[] carTokens = reader.readLine().split("\\s+");
         Vehicles car = new Car(Double.parseDouble(carTokens[1]), Double.parseDouble(carTokens[2]));
         String[] truckTokens = reader.readLine().split("\\s+");
         Vehicles truck = new Truck(Double.parseDouble(truckTokens[1]), Double.parseDouble(truckTokens[2]));
 
-        vehicles.putIfAbsent("Car", car);
-        vehicles.putIfAbsent("Truck", truck);
 
         int numberOfOperation = Integer.parseInt(reader.readLine());
 
-        String pattern = "#.##";
+        String pattern = "0.##############";
         DecimalFormat decimalFormat = new DecimalFormat(pattern);
         while (numberOfOperation-- > 0) {
             String[] commandToken = reader.readLine().split("\\s+");
-            try {
-                if (commandToken[0].equalsIgnoreCase("drive")) {
-                    try {
-                        double distance = Double.parseDouble(commandToken[2]);
-                        vehicles.get(commandToken[1]).drive(distance);
-                        System.out.println(String.format("%s travelled %s km", commandToken[1], decimalFormat.format(distance)));
-                    } catch (IllegalStateException ise) {
-                        System.out.println(ise.getMessage());
-                    }
 
-                } else if (commandToken[0].equalsIgnoreCase("refuel")) {
-                    double fuel = Double.parseDouble(commandToken[2]);
-                    vehicles.get(commandToken[1]).refuel(fuel);
+            if (commandToken.length != 3) {
+                continue;
+            }
+
+            try {
+                switch (commandToken[1]) {
+                    case "Car":
+                        double parameterC = Double.parseDouble(commandToken[2]);
+                        if (isDrive(commandToken[0])) {
+                            car.drive(parameterC);
+                            System.out.println(String.format("Car travelled %s km", decimalFormat.format(parameterC)).replace(",", "."));
+                        } else {
+                            double fuel = Double.parseDouble(commandToken[2]);
+                            car.refuel(fuel);
+                        }
+                        break;
+                    case "Truck":
+                        double parameterT = Double.parseDouble(commandToken[2]);
+                        if (isDrive(commandToken[0])) {
+                            truck.drive(parameterT);
+                            System.out.println(String.format("Truck travelled %s km", decimalFormat.format(parameterT).replace(",", ".")));
+                        } else {
+                            double fuel = Double.parseDouble(commandToken[2]);
+                            truck.refuel(fuel);
+                        }
+                        break;
                 }
             }
-            catch (IllegalStateException ise) {
+            catch (IllegalStateException | IllegalArgumentException ise) {
                 System.out.println(ise.getMessage());
             }
         }
-        vehicles.values().forEach(System.out::println);
+        System.out.println(car.toString());
+        System.out.println(truck.toString());
+    }
+
+    private static boolean isDrive (String s) {
+        return "Drive".equalsIgnoreCase(s);
     }
 }

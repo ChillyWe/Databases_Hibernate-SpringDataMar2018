@@ -28,9 +28,9 @@ public abstract class Vehicles {
         return this.fuelConsumptionPerKm;
     }
 
-    protected abstract void drive (double distance);
+    public abstract void drive (double distance);
 
-    protected abstract void refuel (double litres);
+    public abstract void refuel (double litres);
 
     @Override
     public String toString() {
