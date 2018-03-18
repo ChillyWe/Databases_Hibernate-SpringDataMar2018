@@ -38,7 +38,7 @@ public class Main {
                 System.out.println("No such user exist");
             }
 
-            String debug = "";
+            conn.close();
         }
     }
 }

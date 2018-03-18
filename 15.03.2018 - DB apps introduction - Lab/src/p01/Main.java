@@ -25,9 +25,7 @@ public class Main {
             while(rs.next()) {
                 System.out.println(rs.getString("first_name") + " " + rs.getString("last_name"));
             }
-
-
-            String debug = "";
+            conn.close();
         }
     }
 }
