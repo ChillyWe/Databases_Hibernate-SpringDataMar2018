@@ -19,5 +19,8 @@ public class EmployeesMaximumSalaries {
         for (Object[] dept : departmentsSalaries) {
             System.out.println(String.format("%s - %.2f", dept[0], (BigDecimal) dept[1]).replace(",", "."));
         }
+
+        em.close();
+        emf.close();
     }
 }

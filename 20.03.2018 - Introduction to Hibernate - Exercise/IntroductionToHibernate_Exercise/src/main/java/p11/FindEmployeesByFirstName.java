@@ -26,5 +26,8 @@ public class FindEmployeesByFirstName {
             System.out.println(String.format("%s %s - %s ($%.2f)",
                     employee.getFirstName(), employee.getLastName(), employee.getJobTitle(), employee.getSalary()));
         }
+
+        em.close();
+        emf.close();
     }
 }
