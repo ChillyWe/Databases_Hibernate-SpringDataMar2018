@@ -11,6 +11,6 @@ import java.util.List;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    @Query("SELECT DISTINCT a FROM Book AS b INNER JOIN b.author AS a WHERE YEAR(b.releaseDate) < :year")
+    @Query("SELECT DISTINCT a FROM Book AS b INNER JOIN b.author AS a WHERE YEAR(b.releaseData) < :year")
     List<Author> findAllAuthorsWithBookReleaseDateBefore(@Param("year") Integer year);
 }
