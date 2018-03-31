@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -44,9 +46,14 @@ public class Runner implements CommandLineRunner {
 //        initAuthors();
 //        initCategories();
 //        initBooks();
-//        getAllTitlesAfter2000();
-        getAllAuthorsWithReleaseBookBefore1990();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
+//        getAllTitlesAfter2000();
+//        getAllAuthorsWithReleaseBookBefore1990();
+//        printAuthorsSortedByBookCount();
+
+        String[] authorName = reader.readLine().split("\\s+");
+        getAuthorBooksAndPrint(authorName);
     }
 
     private void initAuthors() throws IOException {
@@ -137,5 +144,13 @@ public class Runner implements CommandLineRunner {
     private void getAllAuthorsWithReleaseBookBefore1990() throws ParseException {
         List<Author> authors = this.authorService.getAuthorsWithBookReleaseDateBefore(1990);
         authors.forEach(a -> System.out.printf("%s %s\n", a.getFirstName(), a.getLastName()));
+    }
+
+    private void printAuthorsSortedByBookCount() {
+       authorService.getAuthorsOrderByBookCount().forEach(System.out::println);
+    }
+
+    private void getAuthorBooksAndPrint(String[] authorName) {
+        authorService.getAuthorBooks(authorName[0], authorName[1]).forEach(System.out::println);
     }
 }

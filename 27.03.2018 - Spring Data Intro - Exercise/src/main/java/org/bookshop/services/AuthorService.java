@@ -13,4 +13,8 @@ public interface AuthorService {
     List<Author> getAllAuthors();
 
     List<Author> getAuthorsWithBookReleaseDateBefore(Integer year);
+
+    List<String> getAuthorsOrderByBookCount();
+
+    List<String> getAuthorBooks(String firstName, String lastName);
 }
