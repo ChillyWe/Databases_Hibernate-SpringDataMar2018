@@ -12,7 +12,9 @@ import soft_unibg.spring_advanced_query.services.AuthorService;
 import soft_unibg.spring_advanced_query.services.BookService;
 import soft_unibg.spring_advanced_query.services.CategoryService;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -45,7 +47,7 @@ public class Runner implements CommandLineRunner {
 //        initCategories();
 //        initBooks();
 
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         // problem 01
 //        String restrictionAge = reader.readLine();
@@ -53,6 +55,23 @@ public class Runner implements CommandLineRunner {
 
         // problem 02
 //        titlesOfTheGoldenBooksEdition();
+
+        // problem 03
+//        printTitlesByPrice();
+
+        // problem 04
+//        String year = reader.readLine();
+//        printTitlesRealiseIsNotYear(year);
+
+        // problem 05
+//        String date = reader.readLine();
+//        printTitlesBeforeYear(date);
+
+        // problem 06
+//        String endsWith = reader.readLine();
+//        printAuthorsEndsWith(endsWith);
+
+        // problem 07
 
     }
 
@@ -142,5 +161,25 @@ public class Runner implements CommandLineRunner {
     private void titlesOfTheGoldenBooksEdition() {
         List<String> allGoldenBooksBefore5000copies = bookService.findAllGoldenBooksBefore5000copies();
         allGoldenBooksBefore5000copies.forEach(System.out::println);
+    }
+
+    private void printTitlesByPrice() {
+        bookService.findBooksBetween5and40().forEach(System.out::println);
+    }
+
+    private void printTitlesRealiseIsNotYear(String year) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        Date date = dateFormat.parse(year + "-01-01");
+        this.bookService.getAllTittlesIsNotYear(date).forEach(System.out::println);
+    }
+
+    private void printTitlesBeforeYear(String year) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = dateFormat.parse(year);
+        this.bookService.getAllTittlesBeforeYear(date).forEach(System.out::println);
+    }
+
+    private void printAuthorsEndsWith(String endsWith) {
+        authorService.getAllAuthorsByFirstNameEndsWith(endsWith).forEach(System.out::println);
     }
 }

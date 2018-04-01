@@ -12,4 +12,5 @@ public interface AuthorService {
 
     List<Author> getAllAuthors();
 
+    List<String> getAllAuthorsByFirstNameEndsWith(String endsWith);
 }

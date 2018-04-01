@@ -6,6 +6,9 @@ import soft_unibg.spring_advanced_query.models.entity.Book;
 import soft_unibg.spring_advanced_query.repositories.BookRepository;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,5 +42,27 @@ public class BookServiceImpl implements BookService {
     public List<String> findAllGoldenBooksBefore5000copies() {
         return bookRepository.findBooksByCopiesBefore(5000)
                 .stream().map(Book::getTitle).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findBooksBetween5and40() {
+        List<String> books = new ArrayList<>();
+
+        bookRepository.findBooksNotBetween(new BigDecimal("5"), new BigDecimal("40"))
+                .forEach(b -> {
+                    String book = String.format("%s - $%.2f", b.getTitle(), b.getPrice()).replace(",", ".");
+                    books.add(book);
+                });
+        return books;
+    }
+
+    @Override
+    public List<String> getAllTittlesIsNotYear(Date year) {
+        return bookRepository.findAllByReleaseDataIsNotLike(year).stream().map(Book::getTitle).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getAllTittlesBeforeYear(Date year) {
+        return bookRepository.findAllByReleaseDataBefore(year).stream().map(Book::getTitle).collect(Collectors.toList());
     }
 }

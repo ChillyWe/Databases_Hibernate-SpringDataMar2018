@@ -6,6 +6,7 @@ import soft_unibg.spring_advanced_query.models.entity.Author;
 import soft_unibg.spring_advanced_query.repositories.AuthorRepository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,5 +32,16 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public List<Author> getAllAuthors() {
         return authorRepository.findAll();
+    }
+
+    @Override
+    public List<String> getAllAuthorsByFirstNameEndsWith(String endsWith) {
+        List<String> result = new ArrayList<>();
+        authorRepository.findAuthorByFirstNameEndingWith(endsWith)
+                .forEach(author -> {
+                    String format = String.format("%s %s", author.getFirstName(), author.getLastName());
+                    result.add(format);
+                });
+        return result;
     }
 }
