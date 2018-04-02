@@ -13,4 +13,8 @@ public interface AuthorService {
     List<Author> getAllAuthors();
 
     List<String> getAllAuthorsByFirstNameEndsWith(String endsWith);
+
+    String getAllTitlesFromAuthorLastNameStartWithStr(String startWith);
+
+    String getAllAuthorsTotalBookCopies();
 }

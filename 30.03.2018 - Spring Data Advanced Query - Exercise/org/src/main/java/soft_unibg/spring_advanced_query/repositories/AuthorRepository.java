@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    List<Author> findAuthorByFirstNameEndingWith(String endswith);
+    List<Author> findAuthorByFirstNameEndingWith(String endsWith);
+
+    List<Author> findAuthorByLastNameStartingWith(String startWith);
 }

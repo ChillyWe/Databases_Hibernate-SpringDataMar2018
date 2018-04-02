@@ -65,4 +65,14 @@ public class BookServiceImpl implements BookService {
     public List<String> getAllTittlesBeforeYear(Date year) {
         return bookRepository.findAllByReleaseDataBefore(year).stream().map(Book::getTitle).collect(Collectors.toList());
     }
+
+    @Override
+    public List<String> getAllTitlesWithContainString(String containThis) {
+        return bookRepository.findAllByTitleContaining(containThis).stream().map(Book::getTitle).collect(Collectors.toList());
+    }
+
+    @Override
+    public Integer getAllBooksWithTitleLongerThan(Integer symbolCount) {
+        return this.bookRepository.findAllByTitleLongerThan(symbolCount);
+    }
 }

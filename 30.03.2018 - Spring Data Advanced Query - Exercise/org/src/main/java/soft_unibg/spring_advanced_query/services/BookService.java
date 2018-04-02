@@ -20,4 +20,8 @@ public interface BookService {
     List<String> getAllTittlesIsNotYear(Date year);
 
     List<String> getAllTittlesBeforeYear(Date year);
+
+    List<String> getAllTitlesWithContainString(String containThis);
+
+    Integer getAllBooksWithTitleLongerThan(Integer symbolCount);
 }

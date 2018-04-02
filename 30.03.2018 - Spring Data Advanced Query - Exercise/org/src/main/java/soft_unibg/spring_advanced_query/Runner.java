@@ -72,7 +72,42 @@ public class Runner implements CommandLineRunner {
 //        printAuthorsEndsWith(endsWith);
 
         // problem 07
+//        String containThis = reader.readLine();
+//        printBookTitleContainsGivenString(containThis);
 
+        // problem 08
+//        String startWith = reader.readLine();
+//        printAuthorsLastNameStartWith(startWith);
+
+        // problem 09
+//        Integer input = Integer.parseInt(reader.readLine());
+//        countBooks(input);
+
+        // problem 10
+//        totalBookCopies();
+
+        // problem 11
+
+
+
+    }
+
+    private void totalBookCopies() {
+        System.out.println(authorService.getAllAuthorsTotalBookCopies());
+    }
+
+    private void countBooks(Integer input) {
+        System.out.println(String.format("There are %d books with longer title than %d symbols"
+                , this.bookService.getAllBooksWithTitleLongerThan(input)
+                , input));
+    }
+
+    private void printAuthorsLastNameStartWith(String startWith) {
+        System.out.println(authorService.getAllTitlesFromAuthorLastNameStartWithStr(startWith));
+    }
+
+    private void printBookTitleContainsGivenString(String containThis) {
+        bookService.getAllTitlesWithContainString(containThis).forEach(System.out::println);
     }
 
     private void initAuthors() throws IOException {

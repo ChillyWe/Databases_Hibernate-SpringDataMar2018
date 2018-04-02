@@ -23,4 +23,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByReleaseDataIsNotLike(Date date);
 
     List<Book> findAllByReleaseDataBefore(Date date);
+
+    List<Book> findAllByTitleContaining(String containThis);
+
+    @Query("SELECT COUNT(b) FROM Book AS b WHERE LENGTH(b.title)> :count")
+    Integer findAllByTitleLongerThan(@Param("count") Integer symbolCount);
 }
