@@ -48,7 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public String getAllTitlesFromAuthorLastNameStartWithStr(String startWith) {
         StringBuilder builder = new StringBuilder();
-        authorRepository.findAuthorByLastNameStartingWith(startWith).stream()
+        authorRepository.findAuthorByLastNameStartingWith(startWith)
                 .forEach(a -> {
                     Set<Book> books = a.getBooks();
                     books.forEach(book -> builder.append(book.getTitle())
