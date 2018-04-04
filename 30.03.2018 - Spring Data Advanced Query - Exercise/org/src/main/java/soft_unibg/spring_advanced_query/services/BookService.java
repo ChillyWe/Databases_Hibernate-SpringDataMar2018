@@ -24,4 +24,10 @@ public interface BookService {
     List<String> getAllTitlesWithContainString(String containThis);
 
     Integer getAllBooksWithTitleLongerThan(Integer symbolCount);
+
+    String getInfoAboutBookWithTitle(String title);
+
+    Integer getCopiesAddedCount(Date date, Integer copiesPlus);
+
+    String deleteBooksWithCopiesUnder(int copies);
 }

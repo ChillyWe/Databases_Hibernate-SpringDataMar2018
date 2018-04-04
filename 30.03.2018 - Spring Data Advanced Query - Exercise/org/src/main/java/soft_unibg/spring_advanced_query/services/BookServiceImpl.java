@@ -1,5 +1,6 @@
 package soft_unibg.spring_advanced_query.services;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import soft_unibg.spring_advanced_query.models.entity.Book;
@@ -74,5 +75,33 @@ public class BookServiceImpl implements BookService {
     @Override
     public Integer getAllBooksWithTitleLongerThan(Integer symbolCount) {
         return this.bookRepository.findAllByTitleLongerThan(symbolCount);
+    }
+
+    @Override
+    public String getInfoAboutBookWithTitle(String title) {
+        StringBuilder builder = new StringBuilder();
+        bookRepository.findAllByTitleIs(title).forEach(book -> builder.append(book.getTitle()).append(" ")
+                .append(book.getEditionType()).append(" ")
+                .append(book.getAgeRestriction()).append(" ")
+                .append(book.getPrice()).append(System.lineSeparator()));
+        return builder.toString();
+    }
+
+    @Override
+    public Integer getCopiesAddedCount(Date date, Integer copiesPlus) {
+        List<Book> allByReleaseDataAfter = bookRepository.findAllByReleaseDataAfter(date);
+
+        allByReleaseDataAfter.forEach(book -> {
+            Integer newCopies = book.getCopies() + copiesPlus;
+            book.setCopies(newCopies);
+            bookRepository.saveAndFlush(book);
+        });
+        return allByReleaseDataAfter.size() * copiesPlus;
+    }
+
+    @Override
+    public String deleteBooksWithCopiesUnder(int copies) {
+        int deletedBooks = bookRepository.deleteAllByCopies(copies);
+        return String.format("%d books were deleted", deletedBooks);
     }
 }

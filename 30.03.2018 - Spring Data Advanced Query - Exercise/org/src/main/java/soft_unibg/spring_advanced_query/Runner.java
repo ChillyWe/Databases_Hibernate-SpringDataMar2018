@@ -1,5 +1,6 @@
 package soft_unibg.spring_advanced_query;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -87,9 +88,33 @@ public class Runner implements CommandLineRunner {
 //        totalBookCopies();
 
         // problem 11
+//        String title = reader.readLine();
+//        reducedBook(title);
 
 
+        // problem 12
+//        String date = reader.readLine();
+//        int copiesPlus = Integer.parseInt(reader.readLine());
+//        increaseBookCopiesAfterGivenDate(date, copiesPlus);
 
+        // problem 13
+        int copies = Integer.parseInt(reader.readLine());
+        deleteAllWithCopiesLowerThenInt(copies);
+    }
+
+    private void deleteAllWithCopiesLowerThenInt(int copies) {
+        System.out.println(bookService.deleteBooksWithCopiesUnder(copies));
+    }
+
+
+    private void increaseBookCopiesAfterGivenDate(String date, int copiesPlus) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date afterThisDate = dateFormat.parse(date);
+        System.out.println(bookService.getCopiesAddedCount(afterThisDate, copiesPlus));
+    }
+
+    private void reducedBook(String title) {
+        System.out.println(bookService.getInfoAboutBookWithTitle(title));
     }
 
     private void totalBookCopies() {
