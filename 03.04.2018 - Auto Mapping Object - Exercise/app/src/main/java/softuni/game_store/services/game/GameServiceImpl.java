@@ -9,15 +9,13 @@ import softuni.game_store.repositories.GameRepository;
 @Service
 @Transactional
 public class GameServiceImpl implements GameService {
-
     private final GameRepository gameRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public GameServiceImpl(GameRepository gameRepository,
-                           ModelMapper modelMapper) {
+    public GameServiceImpl(GameRepository gameRepository) {
         this.gameRepository = gameRepository;
-        this.modelMapper = modelMapper;
+        this.modelMapper = new ModelMapper();
     }
 
     @Override
