@@ -12,9 +12,12 @@ import soft_uni.product_shop.services.user.UserService;
 import javax.transaction.Transactional;
 import java.io.IOException;
 
+import static soft_uni.product_shop.default_values.constants.JSON_USERS_INPUT;
+
 @Component
 @Transactional
 public class Runner implements CommandLineRunner {
+
 
     private UserService userService;
     private ProductService productService;
@@ -25,12 +28,14 @@ public class Runner implements CommandLineRunner {
     @Autowired
     public Runner(UserService userService,
                   ProductService productService,
-                  CategoryService categoryService) {
+                  CategoryService categoryService,
+                  FileReaderMy fileReader,
+                  FileWriterMy fileWriter) {
         this.userService = userService;
         this.productService = productService;
         this.categoryService = categoryService;
-        this.fileReader = new FileReaderMy();
-        this.fileWriter = new FileWriterMy();
+        this.fileReader = fileReader;
+        this.fileWriter = fileWriter;
     }
 
     @Override
@@ -40,7 +45,7 @@ public class Runner implements CommandLineRunner {
     }
 
     private void seedUsers() throws IOException {
-        String s = fileReader.readFile("/inputJson/users.json");
+        String s = fileReader.readFile(JSON_USERS_INPUT);
         String debug = "";
     }
 }
