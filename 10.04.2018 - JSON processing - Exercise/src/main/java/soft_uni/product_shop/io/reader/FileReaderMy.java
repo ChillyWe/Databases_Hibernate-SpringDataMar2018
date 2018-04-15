@@ -1,4 +1,4 @@
-package soft_uni.product_shop.io;
+package soft_uni.product_shop.io.reader;
 
 import org.springframework.stereotype.Component;
 
@@ -8,8 +8,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 @Component
-public class FileReaderMy {
+public class FileReaderMy implements MyFileReader {
 
+    @Override
     public String readFile (String fileName) throws IOException {
         StringBuilder builder = new StringBuilder();
         InputStream inputStream = this.getClass().getResourceAsStream(fileName);

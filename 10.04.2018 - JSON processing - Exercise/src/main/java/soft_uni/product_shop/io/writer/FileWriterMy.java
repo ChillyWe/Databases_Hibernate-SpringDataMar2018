@@ -1,13 +1,14 @@
-package soft_uni.product_shop.io;
+package soft_uni.product_shop.io.writer;
 
 import org.springframework.stereotype.Component;
 
 import java.io.*;
 
 @Component
-public class FileWriterMy {
+public class FileWriterMy implements MyFileWriter {
 
-    public void writeFile (String content, String fileName) throws IOException {
+    @Override
+    public void writeFile(String content, String fileName) throws IOException {
         OutputStream outputStream = new FileOutputStream(fileName);
         try {
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
