@@ -6,15 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import soft_uni.product_shop.io.reader.MyFileReader;
-import soft_uni.product_shop.io.writer.MyFileWriter;
 import soft_uni.product_shop.models.dtos.binding.category.CategoryCreateBindingModel;
 import soft_uni.product_shop.models.dtos.binding.product.ProductCreateBindingModel;
 import soft_uni.product_shop.models.dtos.binding.user.UserCreateBindingModel;
+import soft_uni.product_shop.models.dtos.views.ProductInRangeViewModel;
 import soft_uni.product_shop.services.category.CategoryService;
 import soft_uni.product_shop.services.product.ProductService;
 import soft_uni.product_shop.services.user.UserService;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -30,7 +32,6 @@ public class Runner implements CommandLineRunner {
     private ProductService productService;
     private CategoryService categoryService;
     private MyFileReader fileReader;
-    private MyFileWriter fileWriter;
     private Gson gson;
 
     @Autowired
@@ -38,13 +39,11 @@ public class Runner implements CommandLineRunner {
                   ProductService productService,
                   CategoryService categoryService,
                   MyFileReader fileReader,
-                  MyFileWriter fileWriter,
                   Gson gson) {
         this.userService = userService;
         this.productService = productService;
         this.categoryService = categoryService;
         this.fileReader = fileReader;
-        this.fileWriter = fileWriter;
         this.gson = gson;
     }
 
@@ -55,9 +54,21 @@ public class Runner implements CommandLineRunner {
 //        this.seedCategories();
 //        this.seedCategoriesInProducts();
 
-        
+        List<ProductInRangeViewModel> viewModels = this.productService.getAllByRangeWithoutBuyer(500, 1000);
+        String toJson = this.gson.toJson(viewModels);
+        this.writeToFile("/outputJson/products-in-range.json",toJson);
 
+    }
 
+    private void writeToFile(String fileName, String src) {
+        try {
+            String mainPath = System.getProperty("user.dir") + "/src/main/resources";
+            FileWriter writer = new FileWriter(new File(mainPath + fileName));
+            writer.write(src);
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private  void seedCategoriesInProducts() {

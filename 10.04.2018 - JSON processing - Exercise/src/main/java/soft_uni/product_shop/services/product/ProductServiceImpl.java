@@ -4,12 +4,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import soft_uni.product_shop.models.dtos.binding.product.ProductCreateBindingModel;
+import soft_uni.product_shop.models.dtos.views.ProductInRangeViewModel;
 import soft_uni.product_shop.models.entity.Category;
 import soft_uni.product_shop.models.entity.Product;
 import soft_uni.product_shop.repositories.ProductRepository;
 import soft_uni.product_shop.services.category.CategoryService;
 
 import javax.transaction.Transactional;
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,5 +60,10 @@ public class ProductServiceImpl implements ProductService {
             }
             p.setCategories(categories);
         });
+    }
+
+    @Override
+    public List<ProductInRangeViewModel> getAllByRangeWithoutBuyer(int from, int to) {
+        return this.productRepository.getAllByRangeWithoutBuyer(new BigDecimal(from),new BigDecimal(to));
     }
 }
