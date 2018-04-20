@@ -29,7 +29,7 @@ public class ProcedureController {
             models.getProcedures().forEach(m -> {
                     try {
                         this.procedureService.create(m);
-                        sb.append("Record successfully imported.");
+                        sb.append("Record successfully imported.").append(System.lineSeparator());
                     } catch (IllegalArgumentException e) {
                         sb.append("Error: Invalid data.").append(System.lineSeparator());
                     }
