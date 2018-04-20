@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AnimalAidRepository extends JpaRepository<AnimalAid, Integer> {
 
+    AnimalAid findByName(String name);
 }

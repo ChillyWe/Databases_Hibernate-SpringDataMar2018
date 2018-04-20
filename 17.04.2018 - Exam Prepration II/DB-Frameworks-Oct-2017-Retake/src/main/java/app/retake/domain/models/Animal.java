@@ -53,7 +53,7 @@ public class Animal implements Serializable {
         this.age = age;
     }
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public Passport getPassport() {
         return passport;
     }
@@ -69,5 +69,10 @@ public class Animal implements Serializable {
 
     public void setProcedures(Set<Procedure> procedures) {
         this.procedures = procedures;
+    }
+
+    @PrePersist
+    private void setRelation() {
+        this.passport.setAnimal(this);
     }
 }

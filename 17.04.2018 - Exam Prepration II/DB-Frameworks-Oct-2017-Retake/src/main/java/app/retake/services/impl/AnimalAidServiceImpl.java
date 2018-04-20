@@ -27,6 +27,14 @@ public class AnimalAidServiceImpl implements AnimalAidService {
 
     @Override
     public void create(AnimalAidJSONImportDTO dto) {
-        this.animalAidRepository.saveAndFlush(this.parser.convert(dto, AnimalAid.class));
+        AnimalAid animalAid = this.animalAidRepository.findByName(dto.getName());
+
+        if(animalAid != null) {
+            animalAid.setPrice(dto.getPrice());
+        } else {
+            animalAid = this.parser.convert(dto, AnimalAid.class);
+        }
+
+        this.animalAidRepository.saveAndFlush(animalAid);
     }
 }

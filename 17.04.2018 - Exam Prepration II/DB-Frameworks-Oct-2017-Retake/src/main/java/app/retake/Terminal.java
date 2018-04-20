@@ -39,7 +39,8 @@ public class Terminal implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        this.seedAnimalAids();
+//        this.seedAnimalAids();
+        this.seedAnimals();
     }
 
     private void seedAnimalAids() {
@@ -51,5 +52,12 @@ public class Terminal implements CommandLineRunner {
         }
     }
 
-
+    private void seedAnimals() {
+        try {
+            String resultFromParsing = this.animalController.importDataFromJSON(fileIO.read(Config.ANIMALS_IMPORT_JSON));
+            this.consoleIO.write(resultFromParsing);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

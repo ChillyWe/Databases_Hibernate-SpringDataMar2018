@@ -2,7 +2,6 @@ package app.retake.controllers;
 
 import app.retake.domain.dto.AnimalAidJSONImportDTO;
 import app.retake.parser.ValidationUtil;
-import app.retake.parser.interfaces.ModelParser;
 import app.retake.parser.interfaces.Parser;
 import app.retake.services.api.AnimalAidService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ public class AnimalAidController {
 
     private AnimalAidService animalAidService;
     private Parser parser;
-    private ModelParser modelParser;
 
     @Autowired
     public AnimalAidController(AnimalAidService animalAidService,
