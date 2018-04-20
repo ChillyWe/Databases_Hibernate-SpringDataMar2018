@@ -39,12 +39,16 @@ public class AnimalServiceImpl implements AnimalService {
         } else {
             Animal animal = this.mapper.convert(dto, Animal.class);
             this.animalRepository.saveAndFlush(animal);
-
         }
     }
 
     @Override
     public List<AnimalsJSONExportDTO> findByOwnerPhoneNumber(String phoneNumber) {
         return null;
+    }
+
+    @Override
+    public Animal findBySerialNumber(String animalSerialNumber) {
+        return this.animalRepository.findByPassportSerialNumber(animalSerialNumber);
     }
 }

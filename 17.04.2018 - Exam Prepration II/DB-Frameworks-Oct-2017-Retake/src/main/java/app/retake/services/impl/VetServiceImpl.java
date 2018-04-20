@@ -28,4 +28,9 @@ public class VetServiceImpl implements VetService {
     public void create(VetXMLImportDTO dto) {
         this.vetRepository.saveAndFlush(this.parser.convert(dto, Vet.class));
     }
+
+    @Override
+    public Vet findByName(String vetName) {
+       return this.vetRepository.findByName(vetName);
+    }
 }

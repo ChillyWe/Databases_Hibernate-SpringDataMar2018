@@ -39,11 +39,21 @@ public class Terminal implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-//        this.seedAnimalAids();
-//        this.seedAnimals();
-//        this.seedVets();
+        this.seedAnimalAids();
+        this.seedAnimals();
+        this.seedVets();
+        this.seedProcedures();
 
 
+    }
+
+    private void seedProcedures() {
+        try {
+            String resultFromParsing = this.procedureController.importDataFromXML(fileIO.read(Config.PROCEDURES_IMPORT_XML));
+            this.consoleIO.write(resultFromParsing);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void seedVets() {

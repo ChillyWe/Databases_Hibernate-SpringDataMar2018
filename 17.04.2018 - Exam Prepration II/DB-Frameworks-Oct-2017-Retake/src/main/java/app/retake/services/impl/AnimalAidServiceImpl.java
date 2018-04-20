@@ -37,4 +37,9 @@ public class AnimalAidServiceImpl implements AnimalAidService {
 
         this.animalAidRepository.saveAndFlush(animalAid);
     }
+
+    @Override
+    public AnimalAid getOneByName(String name) {
+        return this.animalAidRepository.findByName(name);
+    }
 }
