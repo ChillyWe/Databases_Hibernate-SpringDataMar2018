@@ -40,7 +40,19 @@ public class Terminal implements CommandLineRunner {
     @Override
     public void run(String... strings) throws Exception {
 //        this.seedAnimalAids();
-        this.seedAnimals();
+//        this.seedAnimals();
+//        this.seedVets();
+
+        
+    }
+
+    private void seedVets() {
+        try {
+            String resultFromParsing = this.vetController.importDataFromXML(fileIO.read(Config.VETS_IMPORT_XML));
+            this.consoleIO.write(resultFromParsing);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void seedAnimalAids() {

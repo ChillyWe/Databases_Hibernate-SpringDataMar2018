@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Controller
 public class AnimalController {
 
-    private Parser parser;
-    private AnimalService animalService;
+    private final Parser parser;
+    private final AnimalService animalService;
 
     @Autowired
     public AnimalController(@Qualifier("JSONParser") Parser parser,

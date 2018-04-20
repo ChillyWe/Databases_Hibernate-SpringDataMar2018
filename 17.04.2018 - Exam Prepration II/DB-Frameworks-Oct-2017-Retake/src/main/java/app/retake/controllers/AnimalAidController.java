@@ -15,8 +15,8 @@ import java.util.Arrays;
 @Controller
 public class AnimalAidController {
 
-    private AnimalAidService animalAidService;
-    private Parser parser;
+    private final AnimalAidService animalAidService;
+    private final Parser parser;
 
     @Autowired
     public AnimalAidController(AnimalAidService animalAidService,
