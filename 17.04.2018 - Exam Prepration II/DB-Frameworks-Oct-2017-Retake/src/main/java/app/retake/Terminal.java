@@ -43,7 +43,7 @@ public class Terminal implements CommandLineRunner {
 //        this.seedAnimals();
 //        this.seedVets();
 
-        
+
     }
 
     private void seedVets() {
