@@ -50,6 +50,11 @@ public class AnimalController {
     }
 
     public String exportAnimalsByOwnerPhoneNumber(String phoneNumber) {
+        try {
+            return this.parser.write(this.animalService.findByOwnerPhoneNumber(phoneNumber));
+        } catch (IOException | JAXBException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 }

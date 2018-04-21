@@ -44,7 +44,16 @@ public class Terminal implements CommandLineRunner {
         this.seedVets();
         this.seedProcedures();
 
+        this.exportByPhoneNumber("0887446123");
+    }
 
+    private void exportByPhoneNumber(String s) {
+        String result = this.animalController.exportAnimalsByOwnerPhoneNumber(s);
+        try {
+            this.fileIO.write(result, "exportAnimalsByOwnerPhoneNumber.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void seedProcedures() {

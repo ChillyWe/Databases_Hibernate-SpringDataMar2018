@@ -15,8 +15,8 @@ import javax.transaction.Transactional;
 @Transactional
 public class AnimalAidServiceImpl implements AnimalAidService {
 
-    private AnimalAidRepository animalAidRepository;
-    private ModelParser parser;
+    private final AnimalAidRepository animalAidRepository;
+    private final ModelParser parser;
 
     @Autowired
     public AnimalAidServiceImpl(AnimalAidRepository animalAidRepository,
