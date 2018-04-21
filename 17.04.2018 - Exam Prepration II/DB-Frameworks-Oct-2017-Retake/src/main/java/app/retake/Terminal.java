@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 @Component
@@ -44,7 +45,19 @@ public class Terminal implements CommandLineRunner {
         this.seedVets();
         this.seedProcedures();
 
-        this.exportByPhoneNumber("0887446123");
+//        this.exportByPhoneNumber("0887446123");
+        this.exportAllProcedures();
+    }
+
+    private void exportAllProcedures() {
+        try {
+            String result = this.procedureController.exportProcedures();
+            String debug = "";
+            this.fileIO.write(result, "exportProcedures.xml");
+
+        } catch (IOException | JAXBException e) {
+            e.printStackTrace();
+        }
     }
 
     private void exportByPhoneNumber(String s) {
