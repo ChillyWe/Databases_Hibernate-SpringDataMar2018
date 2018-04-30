@@ -1,9 +1,13 @@
 package org.softuni.mostwanted.controllers;
 
+import org.softuni.mostwanted.domain.dtos.binding.race.RaceWrapperXMLImportDTO;
 import org.softuni.mostwanted.parser.interfaces.Parser;
 import org.softuni.mostwanted.services.Race.RaceService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
 
 @Controller
 public class RaceController {
@@ -15,5 +19,30 @@ public class RaceController {
                                @Qualifier("XMLParser") Parser parser) {
         this.raceService = raceService;
         this.parser = parser;
+    }
+
+    public String importRaceFromXML(String xmlContent) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            RaceWrapperXMLImportDTO models = this.parser.read(RaceWrapperXMLImportDTO.class, xmlContent);
+
+            models.getRaces().forEach(m -> {
+                try {
+
+                    // TODO dosn't work correct
+                    Integer integer = this.raceService.create(m);
+
+
+                    String debug = "";
+//                    sb.append(String.format("Successfully imported RaceEntry - %d.", integer)).append(System.lineSeparator());
+                } catch (IllegalArgumentException ignored) {
+//                    sb.append("Error: Invalid data.").append(System.lineSeparator());
+                }
+            });
+
+        } catch (JAXBException | IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
     }
 }

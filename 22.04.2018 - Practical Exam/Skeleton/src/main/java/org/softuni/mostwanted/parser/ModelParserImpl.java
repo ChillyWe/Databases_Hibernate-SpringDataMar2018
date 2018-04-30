@@ -13,6 +13,7 @@ public final class ModelParserImpl implements ModelParser {
     public ModelParserImpl() {
         this.mapper = new ModelMapper();
     }
+
     @Override
     public <S, D> D convert(S source, Class<D> destinationClass) {
         return this.mapper.map(source, destinationClass);

@@ -1,6 +1,6 @@
 package org.softuni.mostwanted.controllers;
 
-import org.softuni.mostwanted.domain.dtos.binding.RaceEntryWrapperXMLImportDTO;
+import org.softuni.mostwanted.domain.dtos.binding.raceEntry.RaceEntryWrapperXMLImportDTO;
 import org.softuni.mostwanted.parser.interfaces.Parser;
 import org.softuni.mostwanted.services.RaceEntry.RaceEntryService;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,17 +26,14 @@ public class RaceEntryController {
         try {
             RaceEntryWrapperXMLImportDTO models = this.parser.read(RaceEntryWrapperXMLImportDTO.class, xmlContent);
 
-            String debug = "";
             models.getRaceEntry().forEach(m -> {
                 try {
-                    this.raceEntryService.create(m);
-                    int i = 0;
-                    sb.append(String.format("Successfully imported RaceEntry - %d.", i++)).append(System.lineSeparator());
+                    Integer integer = this.raceEntryService.create(m);
+                    String debug = "";
+                    sb.append(String.format("Successfully imported RaceEntry - %d.", integer)).append(System.lineSeparator());
                 } catch (IllegalArgumentException ignored) {
-                    sb.append("Error: Duplicate Data!").append(System.lineSeparator());
+                    sb.append("Error: Invalid data.").append(System.lineSeparator());
                 }
-                sb.append("Error: Invalid data.").append(System.lineSeparator());
-
             });
 
         } catch (JAXBException | IOException e) {

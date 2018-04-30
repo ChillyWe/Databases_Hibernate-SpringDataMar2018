@@ -38,4 +38,9 @@ public class DistrictServiceImpl implements DistrictService {
             this.districtRepository.saveAndFlush(district);
         }
     }
+
+    @Override
+    public District getOneByName(String districtName) {
+        return this.districtRepository.findByName(districtName);
+    }
 }

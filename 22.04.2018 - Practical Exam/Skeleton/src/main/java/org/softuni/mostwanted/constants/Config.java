@@ -7,5 +7,6 @@ public class Config {
     public static final String CARS_IMPORT_JSON = "/files/json/input/cars.json";
 
     public static final String RACE_ENTRIES_IMPORT_XML = "/files/xml/input/race-entries.xml";
+    public static final String RACE_IMPORT_XML = "/files/xml/input/races.xml";
 
 }

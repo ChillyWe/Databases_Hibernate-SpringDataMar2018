@@ -44,4 +44,10 @@ public class CarServiceImpl implements CarService {
             this.carRepository.saveAndFlush(car);
         }
     }
+
+    @Override
+    public Car getOneById(String carId) {
+        return this.carRepository.getById(Integer.parseInt(carId));
+    }
+
 }

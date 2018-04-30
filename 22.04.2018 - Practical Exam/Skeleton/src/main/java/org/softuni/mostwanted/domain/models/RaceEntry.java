@@ -1,6 +1,7 @@
 package org.softuni.mostwanted.domain.models;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "race_entries")
@@ -8,7 +9,7 @@ public class RaceEntry {
 
     private Integer id;
     private boolean hasFinished;
-    private Integer finishTime;
+    private BigDecimal finishTime;
     private Car car;
     private Racer racer;
 
@@ -36,11 +37,11 @@ public class RaceEntry {
         this.hasFinished = hasFinished;
     }
 
-    public Integer getFinishTime() {
+    public BigDecimal getFinishTime() {
         return finishTime;
     }
 
-    public void setFinishTime(Integer finishTime) {
+    public void setFinishTime(BigDecimal finishTime) {
         this.finishTime = finishTime;
     }
 

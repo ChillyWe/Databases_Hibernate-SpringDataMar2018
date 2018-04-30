@@ -18,6 +18,7 @@ public class Terminal implements CommandLineRunner {
     private final RacerController racerController;
     private final CarController carController;
     private final RaceEntryController raceEntryController;
+    private final RaceController raceController;
 
     private final ConsoleIO consoleIO;
     private final FileIO fileIO;
@@ -28,6 +29,7 @@ public class Terminal implements CommandLineRunner {
                     RacerController racerController,
                     CarController carController,
                     RaceEntryController raceEntryController,
+                    RaceController raceController,
                     ConsoleIO consoleIO,
                     FileIO fileIO) {
         this.townController = townController;
@@ -35,6 +37,7 @@ public class Terminal implements CommandLineRunner {
         this.racerController = racerController;
         this.carController = carController;
         this.raceEntryController = raceEntryController;
+        this.raceController = raceController;
         this.consoleIO = consoleIO;
         this.fileIO = fileIO;
     }
@@ -46,6 +49,16 @@ public class Terminal implements CommandLineRunner {
         this.seedRacers();
         this.seedCars();
         this.seedRaceEntries();
+        this.seedRaces();
+    }
+
+    private void seedRaces() {
+        try {
+            String resultFromParsing = this.raceController.importRaceFromXML(fileIO.read(Config.RACE_IMPORT_XML));
+            this.consoleIO.write(resultFromParsing);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void seedRaceEntries() {
