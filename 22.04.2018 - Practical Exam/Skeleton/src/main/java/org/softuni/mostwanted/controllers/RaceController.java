@@ -28,15 +28,10 @@ public class RaceController {
 
             models.getRaces().forEach(m -> {
                 try {
-
-                    // TODO dosn't work correct
                     Integer integer = this.raceService.create(m);
-
-
-                    String debug = "";
-//                    sb.append(String.format("Successfully imported RaceEntry - %d.", integer)).append(System.lineSeparator());
+                    sb.append(String.format("Successfully imported Race - %d.", integer)).append(System.lineSeparator());
                 } catch (IllegalArgumentException ignored) {
-//                    sb.append("Error: Invalid data.").append(System.lineSeparator());
+                    sb.append("Error: Invalid data.").append(System.lineSeparator());
                 }
             });
 

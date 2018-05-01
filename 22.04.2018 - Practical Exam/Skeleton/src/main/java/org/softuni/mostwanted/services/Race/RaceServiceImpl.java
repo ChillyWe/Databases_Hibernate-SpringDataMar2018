@@ -40,7 +40,7 @@ public class RaceServiceImpl implements RaceService {
 
         // TODO return null <--- why ?
         Set<RaceEntry> entries = dto.getRaceEntries()
-                .stream().map(m -> this.mapper.convert(m,RaceEntry.class)).collect(Collectors.toSet());
+                .stream().map(m -> this.raceEntryService.getById(m.getId())).collect(Collectors.toSet());
 
         Race race = new Race();
         race.setLaps(dto.getLaps());

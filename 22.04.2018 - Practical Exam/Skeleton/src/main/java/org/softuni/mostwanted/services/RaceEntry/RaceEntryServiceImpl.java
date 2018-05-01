@@ -51,6 +51,6 @@ public class RaceEntryServiceImpl implements RaceEntryService {
 
     @Override
     public RaceEntry getById(Integer id) {
-        return this.raceEntryRepository.getOne(id);
+        return this.raceEntryRepository.findOne(id);
     }
 }

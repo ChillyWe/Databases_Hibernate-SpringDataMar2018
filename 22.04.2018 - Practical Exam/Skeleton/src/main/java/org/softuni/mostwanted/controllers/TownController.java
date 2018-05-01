@@ -46,4 +46,15 @@ public class TownController {
         }
         return sb.toString();
     }
+
+    public String exportTownsWithRacers() {
+        try {
+
+            //TODO implement methods ...
+            return this.parser.write(this.townService.findAll());
+        } catch (IOException | JAXBException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
