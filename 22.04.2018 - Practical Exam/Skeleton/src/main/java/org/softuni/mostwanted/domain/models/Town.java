@@ -47,7 +47,7 @@ public class Town {
         this.district = district;
     }
 
-    @OneToMany(mappedBy = "homeTown", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "homeTown", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public Set<Racer> getRacers() {
         return racers;
     }

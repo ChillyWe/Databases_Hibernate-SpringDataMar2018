@@ -1,6 +1,7 @@
 package org.softuni.mostwanted.controllers;
 
 import org.softuni.mostwanted.domain.dtos.binding.TownJSONImportDTO;
+import org.softuni.mostwanted.domain.dtos.views.RacingTownsJSONExportDTO;
 import org.softuni.mostwanted.parser.ValidationUtil;
 import org.softuni.mostwanted.parser.interfaces.Parser;
 import org.softuni.mostwanted.services.Town.TownService;
@@ -11,6 +12,9 @@ import org.springframework.stereotype.Controller;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class TownController {
@@ -49,9 +53,15 @@ public class TownController {
 
     public String exportTownsWithRacers() {
         try {
+            List<RacingTownsJSONExportDTO> models = this.townService.findAll()
+                    .stream().map(town -> {
+                int size = town.getRacers().size();
+                return new RacingTownsJSONExportDTO(town.getName(), size);
+            }).collect(Collectors.toList());
 
-            //TODO implement methods ...
-            return this.parser.write(this.townService.findAll());
+            return this.parser.write(models.stream()
+                    .sorted(Comparator.comparingInt(RacingTownsJSONExportDTO::getRacers).reversed()
+                            .thenComparing(RacingTownsJSONExportDTO::getName)).collect(Collectors.toList()));
         } catch (IOException | JAXBException e) {
             e.printStackTrace();
         }

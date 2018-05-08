@@ -27,7 +27,7 @@ public class FIleIOImpl implements FileIO {
 
     @Override
     public void write(String fileContent, String file) throws IOException {
-        String path = System.getProperty("user.dir") + "/src/main/resources" + file;
+        String path = System.getProperty("user.dir") + "/src/main/resources/out/" + file;
         try (
                 OutputStream outputStream = new FileOutputStream(path);
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream))

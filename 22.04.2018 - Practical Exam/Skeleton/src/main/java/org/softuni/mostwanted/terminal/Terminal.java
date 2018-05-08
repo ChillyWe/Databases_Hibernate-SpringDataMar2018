@@ -52,6 +52,16 @@ public class Terminal implements CommandLineRunner {
         this.seedRaces();
 
         this.exportTowns();
+        this.exportRacingCars();
+    }
+
+    private void exportRacingCars() {
+        String result = this.racerController.exportRacersWithCars();
+        try {
+            this.fileIO.write(result, "racingCars.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void exportTowns() {

@@ -1,12 +1,23 @@
 package org.softuni.mostwanted.domain.dtos.views;
 
 
-public class RacingTownsJSONExportDTO {
+import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
+
+public class RacingTownsJSONExportDTO implements Serializable {
+
+    @Expose
     private String name;
+    @Expose
     private Integer racers;
 
     public RacingTownsJSONExportDTO() {
+    }
+
+    public RacingTownsJSONExportDTO(String name, Integer racers) {
+        this.name = name;
+        this.racers = racers;
     }
 
     public String getName() {
